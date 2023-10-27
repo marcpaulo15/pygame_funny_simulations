@@ -1,0 +1,24 @@
+- config:
+
+    # Configuration of the screen
+    screen_width: 1400  # in pixels
+    screen_height: 900  # in pixels
+    screen_caption: '-->  Pizza Rain [{is_running}]  <--'  # title
+    # Make sure that 'screen_caption' contains '{is_running}'
+
+    # The files (pizza images) used in this simulation
+    # It is assumed that files are stored in 'pizza_rain/images' directory
+    pizza_images_files: [
+      'pizza1.jpg', 'pizza2.jpg', 'pizza3.jpg',
+      'pizza4.jpg', 'pizza5.jpg', 'pizza6.jpg'
+    ]
+    number_of_pizzas: 100  # number of pizzas to display at the same time
+
+    diameter: 70  # Diameter of the pizzas (in pixels)
+    vertical_speed: 4  # Frequency to move down one pixel
+    rotation_every: 60  # Set to null to disable rotation
+    # Every pizza rotates 90º counterclockwise every 'rotation_every' frames
+    vertical_speed_incr: 1  # increment of vertical_speed when keyboard arrows
+    rotation_every_incr: 10  # increment of rotation_every when keyboard arrows
+
+    pygame_clock_tick: 60  # Frames per second
