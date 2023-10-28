@@ -53,7 +53,7 @@ class Circle:
             radius: int,
             velocity: Tuple[int, int],
             color: Tuple[int, int, int]
-         ) -> None:
+    ) -> None:
         """
         Initialize a Circle class.
 
@@ -107,7 +107,7 @@ class Circle:
             velocity_y = - velocity_y
         self.body.velocity = (velocity_x, velocity_y)
 
-    def draw(self, screen):
+    def draw(self, screen: pygame.surface):
         """
         Display the Circle on the given 'screen'.
 
