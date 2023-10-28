@@ -1,0 +1,24 @@
+- config:
+
+    # Configuration of the screen
+    screen_width: 1400  # in pixels
+    screen_height: 900  # in pixels
+    background_color: [255, 255, 255]  # background color (in RGB format)
+    screen_caption: '-->  Shooting Star  <--'  # title
+
+    # How many sparks are generated at each timestep while the mouse is pressed
+    new_sparks_per_time_step: 2
+    gravity: 200  # gravity of the pymunk space
+
+    # The characteristics of each Spark (Pymunk Bodies and Shapes) are
+    # randomly chosen but bounded by the values described below. Pymunk does
+    # not have a specific scale by default, so it's up to you to define the
+    # scale based on the requirements of your simulation.
+    min_radius: 10  # Minimum radius of the Sparks
+    max_radius: 40  # Maximum radius of the Sparks
+    min_lifespan: 20  # Minimum number of time-steps before the Spark vanishes
+    max_lifespan: 80  # Maximum number of time-steps before the Spark vanishes
+    # Feel free to change them as you wish.
+    # NOTE that 'max' must be always greater than 'min'
+
+    pygame_clock_tick: 60  # Frames per second
