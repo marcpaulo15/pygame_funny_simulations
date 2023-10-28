@@ -1,0 +1,27 @@
+- config:
+
+    # Configuration of the screen
+    screen_width: 1400  # in pixels
+    screen_height: 900  # in pixels
+    background_color: [255, 255, 255]  # background color (in RGB format)
+    screen_caption: '-->  Rebound Collisions [{n_circles} circles]  <--'
+    # Make sure that 'screen_caption' contains '{n_circles}'
+
+    # The characteristics of each Circle (PyMunk Bodies and Shapes) are
+    # randomly chosen but bounded by the values described below. Pymunk does
+    # not have a specific scale by default, so it's up to you to define the
+    # scale based on the requirements of your simulation.
+    min_mass: 30  # Minimum mass of the Circles
+    max_mass: 100  # Maximum mass of the Circles
+    min_moment: 5  # Minimum moment of inertia of the Circles
+    max_moment: 50  # Maximum moment of inertia of the Circles
+    min_radius: 20  # Minimum radius of the Circles
+    max_radius: 50  # Maximum radius of the Circles
+    min_velocity_x: 300  # Minimum horizontal speed of the Circles
+    max_velocity_x: 400  # Maximum horizontal speed of the Circles
+    min_velocity_y: 300  # Minimum vertical speed of the Circles
+    max_velocity_y: 400  # Maximum vertical speed of the Circles
+    # Feel free to change them as you wish.
+    # NOTE that 'max' must be always greater than 'min'
+
+    pygame_clock_tick: 60  # Frames per second
