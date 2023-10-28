@@ -4,6 +4,11 @@ Python and the Pygame library. In this simulation, there are a lot of pizzas
 falling down the screen while they rotate. The user is allowed to change the
 fall speed and the rotation speed as well.
 
+Pygame is a Python library that serves as a versatile framework for developing
+2D games and multimedia applications. It provides a straightforward and
+efficient way to manage graphics, sound, user input, and basic collision
+detection.
+
 KEYWORDS: Sprites, Sprite Groups, YAML configuration files, Pygame, Simulations
 """
 
