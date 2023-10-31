@@ -183,9 +183,13 @@ class ShootingStar:
             stop=self._config['max_lifespan']
         )
 
+        # Add a random element -1 or +1 to prevent Sparks (circles) from
+        # stacking vertically when the mouse is hold down but not moving.
+        mouse_pos_ = (mouse_pos[0]+random.choice((-1, 1)), mouse_pos[1])
+
         # Create a new Spark with the random characteristic defined above
         new_spark = Spark(
-            mouse_pos=mouse_pos,
+            mouse_pos=mouse_pos_,
             color=random_color,
             radius=random_radius,
             lifespan=random_lifespan
