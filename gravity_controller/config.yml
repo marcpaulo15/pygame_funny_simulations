@@ -1,0 +1,23 @@
+- config:
+
+    # Configuration of the screen
+    screen_width: 1400  # in pixels
+    screen_height: 900  # in pixels
+    background_color: [255, 255, 255]  # background color (in RGB format)
+    screen_caption: '-->  Gravity Controller  <--'  # title
+
+    # Box class
+    box_background_color: [240, 232, 206]  # box color (in RGB format)
+    n_balls_inside_box: 40  # number of balls inside the box
+    box_width: 800
+    box_height: 600
+    box_line_width: 20  # contour
+    box_line_color: [125, 125, 125]  # contour color (in RGB format)
+
+    # Ball class
+    min_radius: 10  # Minimum radius
+    max_radius: 30 # Maximum radius
+    min_mass: 1  # Minimum mass
+    max_mass: 30  # Maximum mass
+
+    pygame_clock_tick: 60  # Frames per second (pygame clock)
