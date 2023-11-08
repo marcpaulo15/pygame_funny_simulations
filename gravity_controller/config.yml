@@ -6,7 +6,7 @@
     background_color: [255, 255, 255]  # background color (in RGB format)
     screen_caption: '-->  Gravity Controller  <--'  # title
 
-    # Box class
+    # BoundingBox class
     box_background_color: [240, 232, 206]  # box color (in RGB format)
     n_balls_inside_box: 40  # number of balls inside the box
     box_width: 800
