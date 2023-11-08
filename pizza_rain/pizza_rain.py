@@ -1,8 +1,10 @@
 """
-This is a module that implements a funny simulation called 'Pizza Rain' using
-Python and the Pygame library. In this simulation, there are a lot of pizzas
-falling down the screen while they rotate. The user is allowed to change the
-fall speed and the rotation speed as well.
+This module implements a funny simulation called 'Pizza Rain' using Python and
+the Pygame library.
+
+In this simulation, there are a lot of pizzas falling down the screen while
+they rotate. The user is allowed to change the fall speed and the rotation
+speed as well.
 
 Pygame is a Python library that serves as a versatile framework for developing
 2D games and multimedia applications. It provides a straightforward and
@@ -30,7 +32,7 @@ class Pizza(pygame.sprite.Sprite):
     used in game development to represent characters, objects, or other visual
     elements within a graphical environment. The Sprite class includes
     functionalities for things like movement, collision detection, animation,
-     and rendering.
+    and rendering.
     """
 
     def __init__(
@@ -48,17 +50,17 @@ class Pizza(pygame.sprite.Sprite):
         :param vertical_speed: number of pixels to move down at each step
         :param rotation_every: frequency of 90º counterclockwise rotations
         :param diameter: diameter of the Pizza (in pixels)
-        :param screen_height: height of the Pygame screen (surface)
+        :param screen_height: height of the Pygame screen (the main surface)
         :return: None
         """
 
-        super().__init__()  # Initialize parent class pygame.sprite.Sprite
+        super().__init__()  # Initialize Parent Class pygame.sprite.Sprite
 
         # Sanity Check: check that the given 'pizza_img_path' exists
         if not os.path.exists(pizza_img_path):
             raise ValueError('The given pizza_img_path does not exists')
 
-        # Define the image (pygaem surface) and scale it to the given diameter.
+        # Define the image (pygame surface) and scale it to the given diameter.
         self.image = pygame.image.load(pizza_img_path).convert()  # surface
         self.image = pygame.transform.scale(
             surface=self.image, size=(diameter, diameter)
@@ -67,6 +69,11 @@ class Pizza(pygame.sprite.Sprite):
         # Get the rectangle of the surface with the top-left corner at
         # coordinates (0,0). They can be changed using the 'set_center' method.
         self.rect = self.image.get_rect()  # Sprite attribute
+
+        # NOTE: 'image' and 'rect' are attributes inherited from the
+        # pygame.sprite.Sprite parent class. Here we overwrite them, and they
+        # are used in the 'draw' method (also inherited).
+
         self.vertical_speed = vertical_speed  # fall speed in pixels
         self.rotation_every = rotation_every  # frequency of 90º rotations
         self.diameter = diameter  # in pixels
@@ -119,12 +126,12 @@ class Pizza(pygame.sprite.Sprite):
             self.rect.y += self.vertical_speed
             if self.rect.top > self.screen_height:
                 # if the pizza gets out of the screen (at the bottom),
-                # it appears at the top
+                # it appears at the top again
                 self.rect.bottom = 0
 
             self.n_updates += 1
             if self.n_updates == self.rotation_every:
-                # Rotate the pizza
+                # Rotate the pizza every 'rotation_every' updates
                 self.n_updates = 0
                 self.image = pygame.transform.rotate(self.image, angle=90)
 
@@ -136,26 +143,26 @@ class PizzaRain:
     speed up or slow down the simulation and the rotation speed of the pizzas.
 
     In Pygame, a Sprite Group is a fundamental concept that simplifies the
-    management and rendering of multiple sprites (Pizza instances in our case).
+    management and rendering of multiple Sprites (Pizza instances in our case).
     It is a container for holding and organizing sprite objects. Sprite groups
     provide a convenient way to perform common operations on multiple sprites
     simultaneously, such as updating ('update' method) and drawing them on the
-    screen ('update' method). Sprite groups also provide methods for handling
+    screen ('draw' method). Sprite groups also provide methods for handling
     collision detection between sprites ('spritecollide' is used here).
     """
 
-    _white_color = (255, 255, 255)  # background color
+    _screen_background_color = (255, 255, 255)  # white background
 
     def __init__(self) -> None:
         """
-        Initialize a PizzaRain instance
+        Initialize a PizzaRain instance.
         """
 
         # Read the configuration file
         self._dir_path = ''  # updated in '_get_config' method
         self._config = self._get_config()
 
-        self._is_running = True  # If False, the simulation is paused
+        self._is_running = True  # If False, the simulation is paused (K_SPACE)
 
         # Initialize the Pygame elements
         pygame.init()
@@ -167,7 +174,7 @@ class PizzaRain:
         )
         self._clock = pygame.time.Clock()
 
-        # Create the list of Pizza instances
+        # Create the list of Pizza instances (characteristics from config file)
         self._pizza_list = pygame.sprite.Group()
         for _ in range(self._config['number_of_pizzas']):
             pizza_img = random.choice(self._config['pizza_images_files'])
@@ -182,6 +189,7 @@ class PizzaRain:
             while pygame.sprite.spritecollide(
                     pizza, self._pizza_list, dokill=0
             ):
+                # New random center until it does not overlap with other pizzas
                 pizza.set_center(
                     x=random.randrange(self._config['screen_width']),
                     y=random.randrange(self._config['screen_height'])
@@ -241,7 +249,7 @@ class PizzaRain:
                     self._pizza_list.update(
                         rotation_every_incr=self._config['rotation_every_incr']
                     )
-        return True
+        return True  # go on with the simulation
 
     def run_logic(self) -> None:
         """
@@ -254,12 +262,15 @@ class PizzaRain:
 
         if self._is_running:
             self._pizza_list.update()
+        # If the simulation is paused, do nothing
+
         # Update the screen caption to inform about state 'running' or 'paused'
-        pygame.display.set_caption(
-            self._config['screen_caption'].format(
-                is_running='running' if self._is_running else 'paused'
+        if '{is_running}' in self._config['screen_caption']:
+            pygame.display.set_caption(
+                self._config['screen_caption'].format(
+                    is_running='running' if self._is_running else 'paused'
+                )
             )
-        )
 
     def draw(self) -> None:
         """
@@ -268,7 +279,7 @@ class PizzaRain:
         :return: None
         """
 
-        self._screen.fill(self._white_color)  # background color
+        self._screen.fill(self._screen_background_color)  # white background
         self._pizza_list.draw(self._screen)  # display all the pizzas
         pygame.display.update()  # update the screen's content
 
