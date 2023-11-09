@@ -1,0 +1,38 @@
+- config:
+
+    # Configuration of the screen
+    screen_width: 900  # in pixels
+    screen_height: 900  # in pixels
+    # NOTE: a square screen is recommended (screen_width == screen_height)
+    background_image: 'space_background.jpg'  # in 'solar_system/images' dir
+    screen_caption: '-->  Solar System  <--'  # title
+
+    # Sun class
+    sun_radius: 60
+    sun_color: [249, 215, 28]  # in RGB format
+
+    # Planet class
+    n_planets: 8  # number of planets
+    intra_planets_distance: 10  # distance between planets
+    # List of radius. It must have one value for each planet (n_planets)
+    planets_radius: [10, 15, 20, 15, 35, 25, 10, 20]
+    # List of translation steps. Expected values between 0.01 and 0.5
+    # It must have one value for each planet (n_planets)
+    planets_translation_steps: [
+        0.02, 0.01, 0.005, 0.04, 0.015, 0.025, 0.035, 0.03
+    ]
+    # List of RGB colors. It must have one value for each planet (n_planets)
+    planets_colors: [
+      [251, 182, 209],
+      [179, 226, 221],
+      [191, 228, 118],
+      [252, 169, 133],
+      [165, 137, 193],
+      [222, 165, 164],
+      [ 21, 178, 211],
+      [ 35, 110, 150]
+    ]
+    # NOTE that planets_radius, planets_translation_steps, and planets_colors
+    # must have one element for each of the n_planets [len(them) == n_planets]
+
+    pygame_clock_tick: 60  # Frames per second (pygame clock)
