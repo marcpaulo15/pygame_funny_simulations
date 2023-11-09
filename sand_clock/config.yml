@@ -1,0 +1,25 @@
+- config:
+
+    # Configuration of the screen
+    screen_width: 1400  # in pixels
+    screen_height: 950  # in pixels
+    background_color: [255, 255, 255]  # background color (in RGB format)
+    screen_caption: '-->  Sand Clock  <--'  # title
+
+    gravity_y: 700
+    n_sand_grains: 2500
+
+    # Sand Clock Structure Class:
+    structure_width: 700
+    structure_height: 800
+    neck_width: 30
+    line_width: 10
+    line_color: [145, 0, 255]
+
+    # Sand Grain Class:
+    sand_grain_mass: 10
+    sand_grain_radius: 3
+    sand_grain_color_type: 'yellow'
+    # either 'random' or 'yellow' (will raise a ValueError otherwise)
+
+    pygame_clock_tick: 60  # Frames per second
