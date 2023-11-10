@@ -1,0 +1,27 @@
+- config:
+
+    # Configuration of the screen
+    screen_width: 1400  # in pixels
+    screen_height: 950  # in pixels
+    background_color: [255, 255, 255]  # background color (in RGB format)
+    screen_caption: '-->  Wrecking Ball  <--'  # title
+
+    # Pymunk Physics (Space)
+    gravity_y: 200
+
+    # Wrecking Ball
+    wrecking_ball_radius: 80
+    wrecking_ball_color: [0, 0, 0]
+    # The velocity is random but bounded according to the following values:
+    min_velocity_x: 400  # Minimum horizontal velocity
+    max_velocity_x: 600  # Maximum horizontal velocity
+    min_velocity_y: 400  # Minimum vertical velocity
+    max_velocity_y: 600  # Maximum vertical velocity
+
+    # SmallBall Class:
+    small_ball_mass: 10
+    small_ball_radius: 20
+    elasticity: 0.8  # Elasticity of the shape. float between 0 and 1
+    friction: 0.8  # Friction coefficient. float between 0 and 1
+
+    pygame_clock_tick: 60  # Frames per second
