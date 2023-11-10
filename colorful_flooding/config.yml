@@ -1,0 +1,24 @@
+- config:
+
+    # Configuration of the screen
+    screen_width: 1400  # in pixels
+    screen_height: 900  # in pixels
+    background_color: [255, 255, 255]  # background color (in RGB format)
+    screen_caption: '-->  Colorful Flood  <--'  # title
+
+    n_sources: 3  # number of sources that generate balls
+    create_balls_every: 3  # create balls every X time-steps
+    gravity: 300  # Pymunk Physics
+
+    # Circle class
+    mass: 10
+    radius: 15
+    elasticity: 0.5  # Elasticity of the shape. float between 0 and 1
+    friction: 0.5  # Friction coefficient. float between 0 and 1
+
+    # Configure the text '~ Press SPACE BAR to start simulation ~'
+    font_name: 'comicsans'
+    font_size: 60
+    font_color: [0, 0, 0]
+
+    pygame_clock_tick: 60  # Frames per second (pygame clock)
