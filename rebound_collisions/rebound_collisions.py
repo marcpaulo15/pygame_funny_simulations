@@ -1,10 +1,10 @@
 """
 This is a module that implements a funny simulation called 'Rebound Collisions'
-using Python and the Pygame and Pymunk libraries. In this simulation, the user
-uses their mouse to creates new Circles of different colors that move across
-the screen while colliding with each other.
+using Python and the Pygame and Pymunk libraries. In this simulation, you use
+your mouse to creates new Circles of different colors that move across the
+screen while colliding with each other.
 
-The user is allowed to change the physics of the simulation.
+The user is allowed to change the physics and features of the simulation.
 More information can be found in 'rebound_collisions/config.yml'.
 
 Pygame is a Python library that serves as a versatile framework for developing
@@ -42,7 +42,7 @@ class Circle:
     a pymunk circle, with the corresponding 'body' and 'shape' attributes.
 
     A Circle is not allowed to exit the screen. When it hits the limits of the
-    screen, its direction of movement is changed.
+    screen, its direction of movement is changed and it stays inside.
     """
 
     def __init__(
@@ -92,7 +92,7 @@ class Circle:
     def update(self, screen_width: int, screen_height: int) -> None:
         """
         Updates the direction of the velocity when the Circle hits the screen
-        limits.
+        limits. The Circles are not allowed to exit the screen.
 
         :param screen_width: screen's width (in pixels)
         :param screen_height: screen's height (in pixels)
@@ -109,7 +109,7 @@ class Circle:
 
     def draw(self, screen: pygame.surface):
         """
-        Display the Circle on the given 'screen'.
+        Display the Circle on the given 'screen' (pygame surface).
 
         :param screen: pygame Surface where the Circle is displayed
         :return: None
@@ -129,13 +129,7 @@ class ReboundCollisions:
     Circles move across. This class deals with the coordination of the
     different elements involved in the simulation, and with the collision
     between Circles. This class allows the user to create new Circles by
-    clicking the mouse.
-
-    In PyMunk, a "space" (used here in this class) is a fundamental concept and
-    object that represents the environment or the physics simulation world.
-    Think of it as the container that holds and manages all the physical
-    entities, including bodies, shapes, constraints, and the rules governing
-    their behavior.
+    clicking the computer mouse.
     """
 
     def __init__(self) -> None:
@@ -188,9 +182,9 @@ class ReboundCollisions:
 
     def _create_and_add_a_new_circle(self, center: Tuple[int, int]) -> None:
         """
-        Creates and adds a new random circle to the simulation environment.
-        The random characteristics of this circle are bounded (min and max
-        values) following the 'config.yml' file.
+        Creates and adds a new random Circle to the simulation environment.
+        The characteristics of this circle are random but bounded (Min and Max
+        values given in the 'config.yml' file).
 
         :param center: (x,y) where the new Circle is placed
         :return: None. The attribute 'circle_list' is updated.
@@ -252,7 +246,7 @@ class ReboundCollisions:
     def run_logic(self) -> None:
         """
         Update every Circle instance:
-            - the space physics' move forward in time
+            - the space physics' move forward in time (space.step method)
             - change velocities for those Circles which are getting out of the
                 screen limits.
             - create new Circles if the computer mouse is pressed

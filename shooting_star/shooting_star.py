@@ -2,7 +2,7 @@
 This is a module that implements a funny simulation called 'Shooting Star'
 using Python and the Pygame and Pymunk libraries. In this simulation, you
 use your mouse to creates a colorful shooting star. You have to hold down
-your mouse while moving it in order to create the shooting star effect.
+your mouse while you move it in order to create the shooting star effect.
 
 You are allowed to change the physics of the simulation.
 More information can be found in 'shooting_star/config.yml'.
@@ -27,12 +27,11 @@ KEYWORDS: Pygame, Pymunk, YAML, Simulation, Physics using Python, Shooting Star
 
 import os
 import random
-from typing import Any, Dict
+from typing import Any, Dict, Tuple
 
+import yaml
 import pygame
 import pymunk
-import yaml
-from typing import Tuple
 
 
 class Spark:
@@ -53,7 +52,7 @@ class Spark:
         """
         Initialize a Spark instance.
 
-        :param mouse_pos: (x,y) coordinates where the Spark is placed (mouse)
+        :param mouse_pos: (x,y) coordinates where the Spark is created (mouse)
         :param color: color of the Spark in RGB format
         :param radius: initial radius of the Spark, it decreases over time
         :param lifespan: number of time-steps in which the Spark is visible
@@ -64,8 +63,7 @@ class Spark:
         self.radius = radius
         self._init_radius = radius
         self.lifespan = lifespan
-        self._time_steps_left = lifespan
-        self.spark_list = []
+        self._time_steps_left = lifespan  # decreases until it reaches zero
 
         # Create the Spark using the Pymunk library:
         # - body: represents the Spark in the physical world and has
@@ -113,12 +111,6 @@ class ShootingStar:
     create a shooting star effect. This class deals with the coordination of
     the different Sparks involved in visual effect, and with the correct
     reception of the mouse position at each time step.
-
-    In Pymunk, a "space" (used here in this class to simulate gravity) is a
-    fundamental concept and object that represents the environment or the
-    physics simulation world. Think of it as the container that holds and
-    manages all the physical entities, including bodies, shapes, constraints,
-    and the rules governing their behavior.
     """
 
     def __init__(self) -> None:
@@ -170,7 +162,6 @@ class ShootingStar:
 
         :param mouse_pos: (x,y) coordinates of current position of the mouse
         :return: None. The attribute 'spark_list' is updated.
-        :return: None
         """
 
         random_color = random.choices(population=range(255), k=3)
@@ -185,7 +176,7 @@ class ShootingStar:
 
         # Add a random element -1 or +1 to prevent Sparks (circles) from
         # stacking vertically when the mouse is hold down but not moving.
-        mouse_pos_ = (mouse_pos[0]+random.choice((-1, 1)), mouse_pos[1])
+        mouse_pos_ = (mouse_pos[0] + random.choice((-1, 1)), mouse_pos[1])
 
         # Create a new Spark with the random characteristic defined above
         new_spark = Spark(
@@ -245,6 +236,7 @@ class ShootingStar:
         for spark in self.spark_list:
             if spark.zero_radius():
                 self.spark_list.remove(spark)
+                self.space.remove(spark.body, spark.shape)
 
     def draw(self) -> None:
         """

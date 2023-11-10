@@ -8,7 +8,7 @@
 
     # How many sparks are generated at each timestep while the mouse is pressed
     new_sparks_per_time_step: 2
-    gravity: 200  # gravity of the pymunk space
+    gravity: 200  # vertical gravity of the pymunk space
 
     # The characteristics of each Spark (Pymunk Bodies and Shapes) are
     # randomly chosen but bounded by the values described below. Pymunk does
